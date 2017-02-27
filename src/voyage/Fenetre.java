@@ -33,6 +33,7 @@ public class Fenetre extends JFrame implements ActionListener {
 	private boolean test = false;
 	private String Id;
 	private char[] Psw;
+	private String Mdp;
 	private JTextField Nom;
 	private JTextField Prenom;
 	private JTextField DateNaissance;
@@ -72,13 +73,6 @@ public class Fenetre extends JFrame implements ActionListener {
 	// PassWord = passWord;
 	// }
 
-	public JTextArea getResultat() {
-		return Resultat;
-	}
-
-	public void setResultat(JTextArea resultat) {
-		Resultat = resultat;
-	}
 
 	public JPanel getPanel() {
 		return panel;
@@ -319,11 +313,14 @@ public class Fenetre extends JFrame implements ActionListener {
 		if (source == Connexion) {
 			connecte = true;
 			Psw = getPassWord().getPassword();
+			Mdp = String.valueOf(Psw);
 			Id = getPseudo().getText();
-			ConnexionBdd.CoUser(Id, Psw);
-			build();
+			ConnexionBdd.CoUser(Id, Mdp);
+			if (ConnexionBdd.CoOk)
+			{
+				build();
+			}
 
-			System.out.println("AV insc");
 		}
 
 	}

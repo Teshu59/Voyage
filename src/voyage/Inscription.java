@@ -33,6 +33,7 @@ public class Inscription extends JFrame implements ActionListener{
 	private java.util.Date SDateNaissance; 
 	private String Id;
 	private char[] Psw;
+	private String Mdp;
 	
 //	public static String Formulaire() {
 	
@@ -99,6 +100,8 @@ public class Inscription extends JFrame implements ActionListener{
 				System.out.println("Valider");
 //				test = true;
 				Psw = getPassWord().getPassword();
+				Mdp = String.valueOf(Psw);
+				System.out.println("test mdp : " + Mdp);
 				Id = getPseudo().getText(); 
 				SNom = getNom().getText();
 				SPrenom = getPrenom().getText();
@@ -115,7 +118,7 @@ public class Inscription extends JFrame implements ActionListener{
 						e1.printStackTrace();
 					}
 				
-				ConnexionBdd.InscriptionUser(SNom, SPrenom, sdateform.format(SDateNaissance), Id, Psw);
+				ConnexionBdd.InscriptionUser(SNom, SPrenom, sdateform.format(SDateNaissance), Id, Mdp);
 		}
 		}
 		

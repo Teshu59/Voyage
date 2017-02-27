@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.awt.Graphics;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ConnexionBdd extends JPanel {
@@ -14,7 +15,7 @@ public class ConnexionBdd extends JPanel {
 	private static Connection conn;
 	private static Statement vSt;
 	private static ResultSet req;
-	
+	public static boolean  CoOk;
 		  public static void connexion() {      
 
 			String idCircuit;
@@ -67,14 +68,15 @@ public class ConnexionBdd extends JPanel {
 
 		  }
 		  
-		  public static String CoUser(String id, char[] psw){
+		  public static Boolean CoUser(String id, String psw){
 			  String Nom="";
-			  String psw1 = psw.toString();
+//			  String psw1 = psw.toString();
 			  try {
-			  req = vSt.executeQuery("SELECT * FROM Client WHERE identifiant = '" + id +"' AND motdepasse = '" + psw1 + "'");
+			  req = vSt.executeQuery("SELECT * FROM Client WHERE identifiant = '" + id +"' AND motdepasse = '" + psw + "'");
 			  
 			  System.out.println(id);
-			  System.out.println(psw1);
+			  System.out.println(psw);
+			  
 			  
 			  while (req.next()){
 				  System.out.println("ok");
@@ -83,20 +85,38 @@ public class ConnexionBdd extends JPanel {
 		    	   System.out.println("Nom = " + Nom + " !");
 		      }
 	      
+			  if (!req.next())
+			  {
+				  JOptionPane.showMessageDialog(null, "Mauvaise association Pseudo/Mot de passe, veuillez vérifier les information");
+				  CoOk = false;
+				  
+			  }else {
+				  CoOk = true;
+			  }
 			  
 			  }catch (Exception e) {
 
 			      e.printStackTrace();
 		  }
-			return null;
+			  
+			return CoOk;
 		}
 		  
-		  public static String InscriptionUser(String nom, String prenom, String bDate, String id, char[] psw){
+		  public static boolean isCoOk() {
+			return CoOk;
+		}
+
+		public static void setCoOk(boolean coOk) {
+			CoOk = coOk;
+		}
+
+		public static String InscriptionUser(String nom, String prenom, String bDate, String id, String psw){
 //			  String Psw="";
 			  String seq = "SEQIDCLIENT.nextval";
 			  try {
 			  req = vSt.executeQuery("INSERT INTO Client VALUES ("+ seq + ",'" + nom +"','"+ prenom+"','"
 					  + bDate + "','" + id + "','" + psw +"')");
+			  
 			  
 			  System.out.println("Test2");
 //			  while (req.next()){
