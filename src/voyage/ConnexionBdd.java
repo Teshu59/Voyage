@@ -53,13 +53,8 @@ public class ConnexionBdd extends JPanel {
 			    	   System.out.println("Psw = " + idCircuit + " !");
 			      }
 		      
-		      
-		      
 		      System.out.println("Ligne insérée !");
 		      
-		      
-		      
-
 		    } catch (Exception e) {
 
 		      e.printStackTrace();
@@ -77,7 +72,14 @@ public class ConnexionBdd extends JPanel {
 			  System.out.println(id);
 			  System.out.println(psw);
 			  
-			  
+			  if (!req.next())
+			  {
+				  JOptionPane.showMessageDialog(null, "Mauvaise association Pseudo/Mot de passe, veuillez vérifier les information");
+				  CoOk = false;
+				  System.out.println("pas ok");
+			  }else {
+				  CoOk = true;
+			  }
 			  while (req.next()){
 				  System.out.println("ok");
 		    	   Nom = req.getString("NOM");
@@ -85,15 +87,6 @@ public class ConnexionBdd extends JPanel {
 		    	   System.out.println("Nom = " + Nom + " !");
 		      }
 	      
-			  if (!req.next())
-			  {
-				  JOptionPane.showMessageDialog(null, "Mauvaise association Pseudo/Mot de passe, veuillez vérifier les information");
-				  CoOk = false;
-				  
-			  }else {
-				  CoOk = true;
-			  }
-			  
 			  }catch (Exception e) {
 
 			      e.printStackTrace();
@@ -117,11 +110,9 @@ public class ConnexionBdd extends JPanel {
 			  req = vSt.executeQuery("INSERT INTO Client VALUES ("+ seq + ",'" + nom +"','"+ prenom+"','"
 					  + bDate + "','" + id + "','" + psw +"')");
 			  
-			  
 			  System.out.println("Test2");
 //			  while (req.next()){
 ////		    	   Psw = req.getString("MOTDEPASSE");
-//		    	   
 //		    	  
 //		      }
 			  System.out.println("User créé");
