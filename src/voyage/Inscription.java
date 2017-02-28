@@ -22,9 +22,17 @@ public class Inscription extends JFrame implements ActionListener{
 	private JTextField Nom;
 	private JTextField Prenom;
 	private String Date;
+	public boolean inscrit = false;
+//	public void setValider(JButton valider) {
+//		Valider = valider;
+//	}
 
-	public void setValider(JButton valider) {
-		Valider = valider;
+	public boolean isInscrit() {
+		return inscrit;
+	}
+
+	public void setInscrit(boolean inscrit) {
+		this.inscrit = inscrit;
 	}
 
 	private JTextField DateNaissance; 
@@ -94,7 +102,6 @@ public class Inscription extends JFrame implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e) {
 			Object source = e.getSource();
-			System.out.println(source);
 			
 			if(source == Valider){
 				System.out.println("Valider");
@@ -108,6 +115,9 @@ public class Inscription extends JFrame implements ActionListener{
 				SimpleDateFormat sdateform = new SimpleDateFormat ("dd/MM/yyyy");
 //				Date date = null;
 				Date = getDateNaissance().getText();
+				inscrit = true;
+				Fenetre fenetre = new Fenetre();
+				fenetre.build();
 //				SDateNaissance = sdateform.parse(Date);
 				try {
 					SDateNaissance = sdateform.parse(Date);
@@ -120,6 +130,7 @@ public class Inscription extends JFrame implements ActionListener{
 				
 				ConnexionBdd.InscriptionUser(SNom, SPrenom, sdateform.format(SDateNaissance), Id, Mdp);
 		}
+		
 		}
 		
 //		public String requeteNewUser(){

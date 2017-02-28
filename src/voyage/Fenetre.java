@@ -134,6 +134,7 @@ public class Fenetre extends JFrame implements ActionListener {
 														// l'application de se
 														// fermer lors du clic
 														// sur la croix
+		//Ouverture de la page de connexion
 		setContentPane(buildContentPane());
 
 		if (connecte) {
@@ -145,11 +146,11 @@ public class Fenetre extends JFrame implements ActionListener {
 
 		if (inscription) {
 
+			//Ouverture de la page d'incription
 			// setContentPane(buildContentPane2());
 			setContentPane(Ins.buildContentPane2());
 			this.setVisible(true);
 			inscription = false;
-
 		}
 
 		if (test) {
